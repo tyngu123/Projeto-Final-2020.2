@@ -6,7 +6,7 @@
 
 <p><b>BackEnd:</b>    Victor, Yago</p>
 
-<p><b>FrontEnd:</b> </p>
+<p><b>FrontEnd:</b> Danilo, Gabriel Franco, Pedro</p>
 
 <p><b>Banco de Dados:</b>     Carlos, Hygor, João</p>
 
