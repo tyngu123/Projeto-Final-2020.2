@@ -10,7 +10,7 @@ BackEnd :    Victor, Yago
 
 FrontEnd : 
 
-Banco de Dados :     Carlos, Hygor, Pedro
+Banco de Dados :     Carlos, Hygor, João
 
 Documentação :   André, Gabriel Neves
 
