@@ -1,15 +1,15 @@
 
 
 <h1 align="center">Projeto Integrador Senac Turma 2020.2</h1>
-----------------------------------------------------
-Funções:
+<hr>
+<p><b>Funções:</b></p>
 
-BackEnd :    Victor, Yago
+<p><b>BackEnd:</b>    Victor, Yago</p>
 
-FrontEnd : 
+<p><b>FrontEnd:</b> </p>
 
-Banco de Dados :     Carlos, Hygor, João
+<p><b>Banco de Dados:</b>     Carlos, Hygor, João</p>
 
-Documentação :   André, Gabriel Neves
+<p><b>Documentação:</b>   André, Gabriel Neves</p>
 
 ---------------------------------------------------
