@@ -8,8 +8,8 @@
 
 <p><b>FrontEnd:</b> Danilo, Gabriel Franco, Pedro</p>
 
-<p><b>Banco de Dados:</b>     Carlos, Hygor, João</p>
+<p><b>Banco de Dados:</b>     Carlos, Hygor, João, Vinicius</p>
 
-<p><b>Documentação:</b>   André, Gabriel Neves</p>
+<p><b>Documentação:</b>   André, Gabriel Neves, Leonardo</p>
 
 ---------------------------------------------------
