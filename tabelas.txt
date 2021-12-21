@@ -1,0 +1,134 @@
+CREATE DATABASE db_projeto_final
+
+USE db_projeto_final
+
+CREATE TABLE empresa(
+	id int PRIMARY KEY auto_increment,
+        nome_da_empresa VARCHAR(50),
+  	endereco VARCHAR(50)
+);
+
+CREATE TABLE funcionalidade (
+	id int PRIMARY KEY auto_increment,
+	descricao VARCHAR(40)
+);
+
+CREATE TABLE db_relacao (
+	id int primary key auto_increment,
+        id_tipo,
+        id_funcionalidade,
+);
+
+CREATE TABLE tipo_usuario(
+	id int PRIMARY KEY auto_increment,
+        descricao VARCHAR(20)
+);
+
+CREATE TABLE usuario (
+	id int PRIMARY KEY auto_increment,
+        nome VARCHAR(15) NOT NULL,
+        sobrenome VARCHAR(15) NOT NULL,
+        email VARCHAR(50) NOT NULL UNIQUE,
+        senha VARCHAR(15) NOT NULL,
+        id_tipo
+);
+
+CREATE TABLE vagas (
+	id int PRIMARY KEY auto_increment,
+        id_empresa int ,
+        titulo VARCHAR(20) NOT NULL,
+        descricao VARCHAR(300) NOT NULL,
+        salario DECIMAL(6,2) NOT NULL,   
+        beneficio VARCHAR(150) NOT NULL,
+        carga_horaria VARCHAR(50) NOT NULL,
+        localidade VARCHAR(40) NOT NULL,
+        requisitos VARCHAR(200) NOT NULL
+);
+
+
+
+
+
+
+tabela de usuario -
+	id_usuario
+	nome
+	sobrenome
+	nascimento
+	e-mail
+	senha
+	cpf
+	endereco
+	bairro
+	municipio
+	estado
+	cep
+	
+	id_assinatura
+	id_tipo
+	
+tabela de tipo de usuario - 
+	id_tipo
+	
+	descricao
+	id_assinatura
+	
+tabela de assinatura
+	id_assinatura
+	plano 0 - free
+	plano 1	- 1 mês - 5
+	plano 2 - 3 meses - 15
+	plano 3 - 1 ano - 50
+
+tabela de assinatura do cliente 
+	id_ass_cli
+	id_usuario
+	id_assinatura
+
+tabela de funcionalidade free
+	id_free
+	descricao
+
+tabela de funcionalidade premium
+tabela de funcionalidade administrador
+tabela de funcionalidade empresa
+tabela de relação entre o tipo de usuario e as funcionalidades 
+	id
+tabela da empresa
+tabela de vagas
+tabela de termos de uso
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
