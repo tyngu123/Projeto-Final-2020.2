@@ -8,6 +8,18 @@ public class Usuario {
 	private String nome;
 	private Date nascimento;
 	
+	public Usuario(String email, String nome ,Date nascimento) {
+		this.email = email;
+		this.nome = nome;
+		this.nascimento = nascimento;
+	}
+	
+	public Usuario() {
+		
+	}
+	
+	
+
 	public int getId() {
 		return id;
 	}

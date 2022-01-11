@@ -29,6 +29,8 @@ public class MyResource {
         return "Got it!";
     }
     
+ 
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("listar")

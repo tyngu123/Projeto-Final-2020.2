@@ -21,7 +21,10 @@ public class UsuarioResource {
     	List<Usuario> lista = dao.listar();
     	
     	Response response = Response.ok().entity(lista).build();
-    	
     	return response;
     }
+    
+   
+    
+    
 }
