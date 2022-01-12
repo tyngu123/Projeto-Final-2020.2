@@ -4,7 +4,7 @@
 <hr>
 <p><b>Funções:</b></p>
 
-<p><b>BackEnd:</b>    Victor, Yago</p>
+<p><b>BackEnd:</b>    Victor, Yago, Willian</p>
 
 <p><b>FrontEnd:</b> Danilo, Gabriel Franco, Pedro</p>
 
