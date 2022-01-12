@@ -1,104 +1,193 @@
-CREATE DATABASE db_projeto_final
+CREATE DATABASE db_projeto_final;
 
-USE db_projeto_final
-
-CREATE TABLE empresa(
-	id int PRIMARY KEY auto_increment,
-        nome_da_empresa VARCHAR(50),
-  	endereco VARCHAR(50)
-);
-
-CREATE TABLE funcionalidade (
-	id int PRIMARY KEY auto_increment,
-	descricao VARCHAR(40)
-);
-
-CREATE TABLE db_relacao (
-	id int primary key auto_increment,
-        id_tipo,
-        id_funcionalidade,
-);
+USE db_projeto_final;
 
 CREATE TABLE tipo_usuario(
-	id int PRIMARY KEY auto_increment,
+		id_tipo int PRIMARY KEY auto_increment,
         descricao VARCHAR(20)
-);
+   
+     
+) ENGINE = innodb;
 
 CREATE TABLE usuario (
-	id int PRIMARY KEY auto_increment,
+		id_usuario int PRIMARY KEY auto_increment,
         nome VARCHAR(15) NOT NULL,
         sobrenome VARCHAR(15) NOT NULL,
+        nascimento date not null,
+        cpf VARCHAR(11) NOT NULL UNIQUE,
+        endereco VARCHAR(50) NOT NULL,
+        bairro VARCHAR(20) not null,
+        municipio VARCHAR(20) NOT NULL,
+        estado VARCHAR(2) NOT NULL,
+        cep VARCHAR(8) NOT NULL,
         email VARCHAR(50) NOT NULL UNIQUE,
         senha VARCHAR(15) NOT NULL,
-        id_tipo
+        id_tipo int,
+			FOREIGN KEY (id_tipo)
+			REFERENCES tipo_usuario(id_tipo)
+				ON UPDATE CASCADE
+				ON DELETE CASCADE
+) ENGINE = innodb;
+
+CREATE TABLE plano_cliente (
+		id_assinatura int primary key auto_increment,
+		plano0 VARCHAR(30),
+        plano0_descricao VARCHAR (40),
+		plano1 VARCHAR(30),
+        plano1_descricao VARCHAR(40),
+        plano2_empresa VARCHAR(30),
+        plano2_empresa_descricao VARCHAR(40)
+		) ENGINE = innodb;
+        
+CREATE TABLE funcionalidade (
+			id_fun INT PRIMARY KEY auto_increment,
+            fun_plano0 VARCHAR(10),
+            fun_plano0_descricao VARCHAR(100),
+            fun_plano1 VARCHAR (10),
+            fun_plano1_descricao VARCHAR(100),
+            fun_plano2 varchar(10),
+            fun_plano2_descricao VARCHAR(100),
+            fun_admin VARCHAR(10),
+            fun_admin_descricao VARCHAR(100)
+		);       
+        
+    CREATE TABLE relacao (
+			id_relacao INT PRIMARY KEY auto_increment,
+                id_tipo INT,
+            FOREIGN KEY (id_tipo)
+			REFERENCES tipo_usuario(id_tipo)
+			ON UPDATE CASCADE
+            ON DELETE CASCADE,
+            id_fun INT,
+            FOREIGN KEY (id_fun)
+            REFERENCES funcionalidade(id_fun)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE
+	);    
+    
+CREATE TABLE assinatura_do_cliente (
+		id_ass_cli int primary key auto_increment,
+		id_usuario int,
+			foreign key (id_usuario)
+			references usuario(id_usuario)
+				ON UPDATE CASCADE
+				ON DELETE CASCADE,
+		id_assinatura int,
+			foreign key (id_assinatura)
+			references plano_cliente(id_assinatura)
+				ON UPDATE CASCADE
+				ON DELETE CASCADE
+); 
+
+CREATE TABLE Cartao (
+		id_cartao INT primary key auto_increment,
+		numero VARCHAR(45),
+		data_validade DATE,
+		nome_pessoa VARCHAR(45),
+		cvv MEDIUMINT(3),
+		tipo ENUM('Credito', 'Debito'),
+		banco VARCHAR(45)
+);
+
+CREATE TABLE pix (
+		id_pix INT PRIMARY KEY auto_increment,
+		nome_beneficiario VARCHAR(50),
+		chave_pix VARCHAR(20)
+);
+
+CREATE TABLE boleto(
+			id_boleto INT primary key auto_increment,
+			numero VARCHAR(50),
+			data_validade DATE,
+			data_emissao DATE
+);
+
+CREATE TABLE forma_de_pagamento (
+		id_forma_pagamento INT primary key auto_increment,
+		id_cartao INT,
+		FOREIGN KEY (id_cartao)
+		REFERENCES cartao(id_cartao)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE,
+		id_boleto INT,
+		FOREIGN KEY (id_boleto)
+		REFERENCES boleto(id_boleto)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE,
+		id_pix INT,
+		FOREIGN KEY (id_pix)
+		REFERENCES pix(id_pix)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE
+) ENGINE = innodb;
+
+CREATE TABLE venda(
+		id_venda INT,
+		data_venda DATE,
+		id_assinatura INT,
+        FOREIGN KEY (id_assinatura)
+		REFERENCES plano_cliente(id_assinatura)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE,
+		id_forma_pagamento int,
+        foreign key (id_forma_pagamento)
+        references forma_de_pagamento(id_forma_pagamento)
+			ON UPDATE CASCADE
+            ON DELETE CASCADE
+) ENGINE = innodb;
+
+CREATE TABLE empresa(
+	id_empresa int PRIMARY KEY auto_increment,
+    nome_da_empresa VARCHAR(50) NOT NULL,
+    cnpj VARCHAR(14) NOT NULL,
+    email VARCHAR (50) NOT NULL UNIQUE,
+    senha VARCHAR (50) NOT NULL,
+    endereco VARCHAR(50)
 );
 
 CREATE TABLE vagas (
-	id int PRIMARY KEY auto_increment,
-        id_empresa int ,
+		id_vagas int PRIMARY KEY auto_increment,
+        id_empresa int,
+         FOREIGN KEY (id_empresa)
+		REFERENCES empresa(id_empresa)
+        ON UPDATE CASCADE
+            ON DELETE CASCADE,
         titulo VARCHAR(20) NOT NULL,
         descricao VARCHAR(300) NOT NULL,
-        salario DECIMAL(6,2) NOT NULL,   
+        salario DECIMAL(6,2) NOT NULL,  
         beneficio VARCHAR(150) NOT NULL,
         carga_horaria VARCHAR(50) NOT NULL,
         localidade VARCHAR(40) NOT NULL,
         requisitos VARCHAR(200) NOT NULL
-);
+);            
+
+CREATE TABLE termo_uso (
+	   id_termo INT PRIMARY KEY auto_increment,
+       descricao VARCHAR(100)
+       );
+       
+CREATE TABLE sobre (
+			id_sobre INT PRIMARY KEY auto_increment,
+            descricao VARCHAR(100)
+            );
+            
+CREATE TABLE config (
+			id_config INT PRIMARY KEY auto_increment,
+            id_termo INT,
+            FOREIGN KEY (id_termo)
+			REFERENCES termo_uso(id_termo)
+			ON UPDATE CASCADE
+            ON DELETE CASCADE,
+            id_sobre INT,
+            FOREIGN KEY (id_sobre)
+			REFERENCES sobre(id_sobre)
+			ON UPDATE CASCADE
+            ON DELETE CASCADE
+	);
+    
 
 
-
-
-
-
-tabela de usuario -
-	id_usuario
-	nome
-	sobrenome
-	nascimento
-	e-mail
-	senha
-	cpf
-	endereco
-	bairro
-	municipio
-	estado
-	cep
-	
-	id_assinatura
-	id_tipo
-	
-tabela de tipo de usuario - 
-	id_tipo
-	
-	descricao
-	id_assinatura
-	
-tabela de assinatura
-	id_assinatura
-	plano 0 - free
-	plano 1	- 1 mês - 5
-	plano 2 - 3 meses - 15
-	plano 3 - 1 ano - 50
-
-tabela de assinatura do cliente 
-	id_ass_cli
-	id_usuario
-	id_assinatura
-
-tabela de funcionalidade free
-	id_free
-	descricao
-
-tabela de funcionalidade premium
-tabela de funcionalidade administrador
-tabela de funcionalidade empresa
-tabela de relação entre o tipo de usuario e as funcionalidades 
-	id
-tabela da empresa
-tabela de vagas
-tabela de termos de uso
-
- 
+drop database db_projeto_final;
 
 
 
