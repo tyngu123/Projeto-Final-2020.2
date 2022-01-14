@@ -10,7 +10,7 @@ public class App {
 	public static void main(String[] args) {
 		UsuarioDAO d = new UsuarioDAO();
 		
-		Usuario user = new Usuario("arroz@gmail.com","Yago",new Date(2001-23-12),"0999",9);
+		Usuario user = new Usuario("arroz@gmail.com","123");
 		Usuario user1 = new Usuario(1);
 		// Depois passar uma id como instancia
 		//d.cadastrar(user1);
@@ -18,6 +18,8 @@ public class App {
 		//d.cadastrar(user);
 		//d.cadastrar(user);
 		//d.alterar(user);
+		d.executarLogin("a", "b");
+		
 	}
 
 }

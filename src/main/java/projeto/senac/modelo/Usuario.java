@@ -17,6 +17,11 @@ public class Usuario {
 		
 	}
 	
+	public Usuario(String email,String senha) {
+		this.email = email;
+		this.senha = senha;
+	}
+	
 
 	
 	public Usuario() {
@@ -70,8 +75,5 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public int getCodigo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 }

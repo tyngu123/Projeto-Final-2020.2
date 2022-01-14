@@ -154,44 +154,98 @@ public class UsuarioDAO {
 		return retorno;
 	}
 	
-	public Usuario procurarId(int id){
+	public Usuario executarLogin(String email,String senha) {
 		Connection cnx = Dao.getConexao();
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT * FROM usuario WHERE id = ?");
 		
-		PreparedStatement ps; // Statement recebe os comandos do sql e recebe informações 
-		Usuario usuario = new Usuario();
+		sql.append("SELECT * FROM usuario WHERE email = ? AND senha = ?");
 		
+		PreparedStatement ps; // 
 		
+		//boolean retorno = true;
+		Usuario u = new Usuario();
 		
 		try {
 			ps = cnx.prepareStatement(sql.toString());
 			
-			ResultSet rs = ps.executeQuery();
 			
-			ps.setInt(1, usuario.getId());
+			
+			
+			ps.setString(1, email);
+			ps.setString(2, senha);
+				
+			
+			
+				
+			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				
-				
-				usuario.setId(rs.getInt("id"));
-				usuario.setEmail(rs.getString("email"));
-				usuario.setNome(rs.getString("nome"));
-				usuario.setNascimento(rs.getDate("nascimento"));
-				usuario.setSenha(rs.getString("senha"));
-				
-				
+				u.setId(rs.getInt("id"));
+				u.setEmail(rs.getString("email"));
+				u.setNome(rs.getString("nome"));
+				u.setNascimento(rs.getDate("nascimento"));
+				u.setSenha(rs.getString("senha"));
 			}
-		} catch (SQLException e) {
+			ps.execute();
+			ps.close();
+			cnx.close();
+			}
+		 catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			Dao.fecharConexao();
-			return usuario;
-		}
+			//retorno = false;
+		} 
+		return u;
+	}
+	
+	public Usuario buscarId(int id) {
+		Connection cnx = Dao.getConexao();
+		
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append("SELECT * FROM usuario WHERE id = ?");
+		
+		PreparedStatement ps; // 
+		
+		//boolean retorno = true;
+		Usuario u = new Usuario();
+		
+		try {
+			ps = cnx.prepareStatement(sql.toString());
+			
+			
+			
+			
+			ps.setInt(1, id);
+			
+				
+			
+			
+				
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				u.setId(rs.getInt("id"));
+				u.setEmail(rs.getString("email"));
+				u.setNome(rs.getString("nome"));
+				u.setNascimento(rs.getDate("nascimento"));
+				u.setSenha(rs.getString("senha"));
+			}
+			ps.execute();
+			ps.close();
+			cnx.close();
+			}
+		 catch (SQLException e) {
+			e.printStackTrace();
+			//retorno = false;
+		} 
+		return u;
+	}
 		
 	}
 	
 	
-	}
+	
 	
