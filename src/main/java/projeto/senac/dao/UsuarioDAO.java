@@ -243,6 +243,47 @@ public class UsuarioDAO {
 		} 
 		return u;
 	}
+	
+	public List<Usuario> buscarNome(String nome){
+		Connection cnx = Dao.getConexao();
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT * FROM usuario WHERE nome = ?");
+		
+		PreparedStatement ps; // Statement recebe os comandos do sql e recebe informações 
+		
+		List<Usuario> lista = new ArrayList<Usuario>();
+		Usuario u;
+		
+		try {
+			ps = cnx.prepareStatement(sql.toString());
+			
+			ps.setString(1, nome);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				u = new Usuario();
+				
+				u.setId(rs.getInt("id"));
+				u.setEmail(rs.getString("email"));
+				u.setNome(rs.getString("nome"));
+				u.setNascimento(rs.getDate("nascimento"));
+				u.setSenha(rs.getString("senha"));
+				
+				lista.add(u);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dao.fecharConexao();
+			return lista;
+		}
+		
+	}
+	
+	
+	
 		
 	}
 	

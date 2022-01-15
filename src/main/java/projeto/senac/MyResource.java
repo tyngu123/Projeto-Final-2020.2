@@ -89,11 +89,14 @@ public class MyResource {
     @Path("logar")
     public Response getUsuariosLogar(@QueryParam("email")String email,@QueryParam("senha")String senha) {
     	UsuarioServico servico = new UsuarioServico();
-    	Usuario resultado = servico.logarUsuario(email,senha);
-    	//System.out.println("Email: " + email + "    Senha: " +senha);
-    	//String result = usuario.getEmail() +" "+ usuario.getSenha();
-    	Response response = Response.ok().entity(resultado).build();
-    	return response;
+    	Usuario usuario = servico.logarUsuario(email,senha);
+    	if(usuario.getId() != 0) {
+        	Response response = Response.ok().entity(usuario).build();
+        	return response;
+        	} else {
+        	Response response = Response.ok().entity("Usuário ou senha incorreto.").build();
+            return response;
+        	}
     }
     
     @GET
@@ -102,11 +105,37 @@ public class MyResource {
     @Path("buscarId")
     public Response getUsuariosId(@QueryParam("id")int id) {
     	UsuarioServico servico = new UsuarioServico();
-    	Usuario resultado = servico.buscarUsuarioId(id);
+    	Usuario usuario= servico.buscarUsuarioId(id);
     	//System.out.println("Email: " + email + "    Senha: " +senha);
     	//String result = usuario.getEmail() +" "+ usuario.getSenha();
-    	Response response = Response.ok().entity(resultado).build();
+    	if(usuario.getId() != 0) {
+    	Response response = Response.ok().entity(usuario).build();
     	return response;
+    	} else {
+    	Response response = Response.ok().entity("Não foi possível encontrar esse ID").build();
+        return response;
+    	}
+    	
+    }
+    
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("buscarNome")
+    public Response getUsuariosNome(@QueryParam("nome")String nome) {
+    	UsuarioServico servico = new UsuarioServico();
+    	List<Usuario> lista = servico.buscarUsuarioNome(nome);
+    	
+    	
+    	if(!lista.isEmpty()) {
+    		Response response = Response.ok().entity(lista).build();
+    	
+    		return response;
+    	} else {
+    		Response response = Response.ok().entity("Nome não encontrado").build();
+        	
+        	return response;
+    	}
     }
     
    

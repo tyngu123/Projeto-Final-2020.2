@@ -50,4 +50,12 @@ public class UsuarioServico {
 	}
 	
 	
+		public List<Usuario> buscarUsuarioNome(String nome){
+	    	UsuarioDAO dao = new UsuarioDAO();
+	    	List<Usuario> lista = dao.buscarNome(nome);
+	    	
+	    	return lista;
+		}
+	
+	
 }
